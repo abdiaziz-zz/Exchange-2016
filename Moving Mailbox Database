@@ -1,0 +1,25 @@
+MAILBOX USERS
+Get-Mailbox -Database "Mailbox Database 01"
+Get-Mailbox -Database "Mailbox Database 01" | New-MoveRequest -TargetDatabase "Mailbox Database 02"
+
+ARBITRATION MAILBOXES
+Get-Mailbox -Arbitration | Ft Name, Database
+Get-Mailbox -Arbitration | Set-Mailbox -Arbitration -Database "Mailbox Database 02"
+Get-Mailbox -Database "Mailbox Database 01" -Arbitration
+Get-Mailbox -Database "Mailbox Database 01" -Arbitration | New-MoveRequest -TargetDatabase "Mailbox Database 02"
+
+
+ARCHIVE MAILBOXES
+Get-Mailbox -Database "Mailbox Database 01" -Archive
+Get-Mailbox | Where ArchiveDatabase -eq "Mailbox Database 01" | New-MoveRequest -ArchiveOnly -ArchiveTargetDatabase "Mailbox Database 02"
+
+PUBLIC FOLDERS
+Get-Mailbox -Database "Mailbox Database 01" -PublicFolder
+Get-Mailbox -Database "Mailbox Database 01" -PublicFolder | New-MoveRequest -TargetDatabase "Mailbox Database 02"
+
+AUDIT LOGS
+Get-Mailbox -Database "Mailbox Database 01" -AuditLog 
+Get-Mailbox -Database "Mailbox Database 01" -AuditLog | New-MoveRequest ñTargetDatabase "Mailbox Database 02"
+
+REMOVEDATABSE
+Remove-MailboxDatabase -Identity "Mailbox Database 01"
