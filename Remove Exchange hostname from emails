@@ -1,0 +1,5 @@
+#Open Exchange Management Shell
+
+Remove-ADPermission –id “Send Email to Internet” -AccessRight ExtendedRight -ExtendedRights “ms-Exch-Send-Headers-Routing” -user “NT AUTHORITY\Anonymous Logon”
+
+#Replace "Send Email to Internet" with the name of your send connector.
