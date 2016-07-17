@@ -1,0 +1,87 @@
+##The RSAT-ADDS feature must be installed.
+
+Install-WindowsFeature RSAT-ADDS
+
+##Insall the Unified Communications Managed API 4.0 Runtime.
+
+https://www.microsoft.com/en-us/download/details.aspx?id=34992
+
+#Install Windows Components and restart:
+
+Install-WindowsFeature AS-HTTP-Activation, Desktop-Experience, NET-Framework-45-Features, RPC-over-HTTP-proxy, RSAT-Clustering, RSAT-Clustering-CmdInterface, RSAT-Clustering-Mgmt, RSAT-Clustering-PowerShell, Web-Mgmt-Console, WAS-Process-Model, Web-Asp-Net45, Web-Basic-Auth, Web-Client-Auth, Web-Digest-Auth, Web-Dir-Browsing, Web-Dyn-Compression, Web-Http-Errors, Web-Http-Logging, Web-Http-Redirect, Web-Http-Tracing, Web-ISAPI-Ext, Web-ISAPI-Filter, Web-Lgcy-Mgmt-Console, Web-Metabase, Web-Mgmt-Console, Web-Mgmt-Service, Web-Net-Ext45, Web-Request-Monitor, Web-Server, Web-Stat-Compression, Web-Static-Content, Web-Windows-Auth, Web-WMI, Windows-Identity-Foundation –Restart
+
+##Install Exchange 2016 (I've extracted the ISO to my desktop):
+#Run Powershell in Administrator mode:
+
+cd C:\Users\aziz\Desktop\Exchange2016\
+
+##If you do not already have an Exchange organization you’ll need to provide a name for the organization, for example:
+
+Setup.exe /PrepareAD /OrganizationName:"CONTOSO CORP" /IAcceptExchangeServerLicenseTerms
+
+##If you already have an an Exchange organization, use the following:
+
+Setup.exe /PrepareAD /IAcceptExchangeServerLicenseTerms
+
+##Install everything on the C drive (Not recommended):
+
+Setup.exe /Mode:Install /Role:Mailbox /IAcceptExchangeServerLicenseTerms
+
+#RESTART SERVER
+
+###Other useful Exchange commands during install:
+
+Setup.exe /mode:Install /role:Mailbox /OrganizationName:MyOrg /IAcceptExchangeServerLicenseTerms
+#This command creates an Exchange 2016 organization in Active Directory called MyOrg, installs the Mailbox server role and the management tools, and also accepts the Exchange 2016 licensing terms.
+
+Setup.exe /mode:Install /role:Mailbox /TargetDir:"C:\Exchange Server" /IAcceptExchangeServerLicenseTerms
+#This command installs the Mailbox server role and the management tools in the "C:\Exchange Server" directory. This command assumes an Exchange 2016 organization has already been prepared.
+
+Setup.exe /mode:Install /r:MB /IAcceptExchangeServerLicenseTerms
+#This command installs the Mailbox server role and the management tools in the default installation location.
+
+Setup.exe /mode:Install /r:EdgeTransport /IAcceptExchangeServerLicenseTerms
+#This command installs the Edge Transport server role and the management tools in the default installation location.
+
+Setup.exe /mode:Install /r:ET /IAcceptExchangeServerLicenseTerms
+#This command installs the Edge Transport server role and the management tools in the default installation location.
+
+Setup.exe /mode:Uninstall /IAcceptExchangeServerLicenseTerms
+#This command completely removes Exchange 2016 from the server and removes this server's Exchange configuration from Active Directory.
+
+Setup.exe /PrepareAD /on:"My Org" /IAcceptExchangeServerLicenseTerms
+#This command creates an Exchange organization called My Org and prepares Active Directory for Exchange 2016.
+
+Setup.exe /role:Mailbox /UpdatesDir:"C:\ExchangeServer\New Patches" /IAcceptExchangeServerLicenseTerms
+#This command updates ExchangeServer.msi with patches from the specified directory, and then installs the Mailbox server role and the management tools. If a language pack bundle is included in this directory, the language pack is also installed.
+
+Setup.exe /mode:Install /role:Mailbox /DomainController:DC01 /IAcceptExchangeServerLicenseTerms
+#This command uses the domain controller DC01 to query and make changes to Active Directory while installing Mailbox server role and the management tools.
+
+Setup.exe /mode:Install /role:Mailbox /AnswerFile:c:\ExchangeConfig.txt /IAcceptExchangeServerLicenseTerms
+#This command installs the Mailbox server role by using the settings in the ExchangeConfig.txt file.
+
+Setup.exe /rprs:Exchange03 /IAcceptExchangeServerLicenseTerms
+#This command removes the object Exchange03 from Active Directory.
+
+Setup.exe /AddUmLanguagePack:ko-KR /IAcceptExchangeServerLicenseTerms
+#This command installs the Korean Unified Messaging language pack from the %ExchangeSourceDir%\ServerRoles\UnifiedMessaging directory.
+
+
+Setup.exe [/Mode:<setup mode>] [/IAcceptExchangeServerLicenseTerms]
+[/Role:<server role to install>] [/InstallWindowsComponents] 
+[/OrganizationName:<name for the new Exchange organization>] 
+[/TargetDir:<target directory>] [/SourceDir:<source directory>]
+[/UpdatesDir:<directory from which to install updates>] 
+[/DomainController:<FQDN of domain controller>] [/DisableAMFiltering]
+[/AnswerFile:<filename>] [/DoNotStartTransport] 
+[/EnableErrorReporting] [/CustomerFeedbackEnabled:<True | False>] 
+[/AddUmLanguagePack:<UM language pack name>] 
+[/RemoveUmLanguagePack:<UM language pack name>] 
+[/NewProvisionedServer:<server>] [/RemoveProvisionedServer:<server>] 
+[/MdbName:<mailbox database name>] [/DbFilePath:<Edb file path>] 
+[/LogFolderPath:<log folder path>] [/ActiveDirectorySplitPermissions:<True | False>]
+[/TenantOrganizationConfig:<path>]
+
+
+https://technet.microsoft.com/en-us/library/aa997281(v=exchg.160).aspx
