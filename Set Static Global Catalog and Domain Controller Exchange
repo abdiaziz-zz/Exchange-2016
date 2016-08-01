@@ -1,0 +1,6 @@
+#See Current Setup
+Get-ExchangeServer –Identity SERVERNAME -Status | FL
+
+#Set Static Entries
+Set-ExchangeServer -Identity SERVERNAME -StaticDomainControllers dc1.ad.domain.com
+Set-ExchangeServer -Identity SERVERNAME -StaticGlobalCatalogs dc1.ad.domain.com
