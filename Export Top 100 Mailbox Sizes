@@ -1,3 +1,0 @@
-#Run this command in Exchange Management Shell
-
-Get-Mailbox -ResultSize Unlimited | Get-MailboxStatistics | Sort-Object TotalItemSize -Descending | Select-Object DisplayName,TotalItemSize -First 30 | Export-CSV “C:\Users\aziz\Desktop\GrabTop100Mailboxes.csv”
