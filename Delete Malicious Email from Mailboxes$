@@ -1,0 +1,7 @@
+#Search for the content in question:
+
+Search-Mailbox -Identity "INSERT MAILBOX ALIAS" -SearchQuery'Subject:"URGENT UPDATE"' -DeleteContent
+
+#Delete the email from all mailboxes:
+
+Get-Mailbox -ResultSize unlimited | Search-Mailbox -SearchQuery 'Subject:"Your query"' –DeleteContent
